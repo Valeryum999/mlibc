@@ -274,6 +274,10 @@ elif host_machine.system() == 'nyaux'
 	rtld_include_dirs += include_directories('sysdeps/nyaux/include')
 	libc_include_dirs += include_directories('sysdeps/nyaux/include')
 	subdir('sysdeps/nyaux')
+elif host_machine.system() == 'prometheos'
+	rtld_include_dirs += include_directories('sysdeps/prometheos/include')
+	libc_include_dirs += include_directories('sysdeps/prometheos/include')
+	subdir('sysdeps/prometheos')
 else
 	error('No sysdeps defined for OS: ' + host_machine.system())
 endif
