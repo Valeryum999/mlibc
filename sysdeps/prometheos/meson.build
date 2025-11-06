@@ -6,10 +6,12 @@ sysdep_supported_options = {
 }
 
 rtld_sources += files(
+	#'generic/generic.cpp',
 )
 
 libc_sources += files(
-	'generic/entry.cpp'
+	'generic/entry.cpp',
+	'generic/generic.cpp',
 )
 
 if not no_headers
@@ -64,9 +66,6 @@ if not no_headers
 		'include/abi-bits/sigevent.h',
 		'include/abi-bits/utmpx.h',
 		'include/abi-bits/utmp-defines.h',
-		'include/abi-bits/fd_set.h',
-		'include/abi-bits/sem.h',
-		'include/abi-bits/route.h',
 		subdir: 'abi-bits',
 		follow_symlinks: true
 	)
