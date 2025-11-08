@@ -2,6 +2,9 @@
 #define _PROMETHEOS_SYSCALL
 
 extern "C" {
+
+#define PTRDIFF_MAX	2147483647L
+
 using sc_word_t = long;
 
 static sc_word_t __do_syscall0(long sc) {
