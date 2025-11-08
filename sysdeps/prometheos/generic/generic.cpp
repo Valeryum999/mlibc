@@ -74,12 +74,14 @@ int sys_openat(int dirfd, const char *path, int flags, mode_t mode, int *fd) {
 		return error;
 	}
 
-	int sys_write(int fd, const void *buff, size_t count, ssize_t *bytes_written) {
-		long writec;
-		long error = syscall(SYSCALL_WRITE, &writec, fd, (uint64_t)buff, count);
-		*bytes_written = writec;
-		return error;
-	}
+int sys_write(int fd, const void *buffer, size_t size, ssize_t *bytes_written) {
+	auto ret = syscall(SYSCALL_WRITE, fd, buffer, size);
+	if(int e = sc_error(ret); e)
+		return e;
+	if(bytes_written)
+		*bytes_written = (ssize_t)(ret);
+	return 0;
+}
 
 	int sys_seek(int fd, off_t offset, int whence, off_t *new_offset) {
 		long ret = 0;
