@@ -3,8 +3,6 @@
 
 extern "C" {
 
-#define PTRDIFF_MAX	2147483647L
-
 using sc_word_t = long;
 
 static sc_word_t __do_syscall0(long sc) {
@@ -145,6 +143,19 @@ inline int sc_error(long ret) {
     if (ret < 0)
         return -ret;
     return 0;
+}
+
+// Cast from the syscall result type.
+template<typename T>
+T sc_int_result(long ret) {
+	auto v = static_cast<sc_word_t>(ret);
+	return v;
+}
+
+template<typename T>
+T *sc_ptr_result(long ret) {
+	auto v = static_cast<sc_word_t>(ret);
+	return reinterpret_cast<T *>(v);
 }
 
 
